@@ -1,0 +1,28 @@
+<div class="bg-[#262624] px-2 py-1 w-fit rounded-full flex items-center gap-1 shadow-md">
+  <!-- Light -->
+  <span
+    class="p-1 rounded-full cursor-pointer transition-colors duration-200 hover:bg-gray-500/40"
+    [class.bg-white]="activeTheme === 'light'"
+    (click)="setTheme('light')"
+  >
+    <lucide-icon [img]="light" class="my-icon" [color]="activeTheme === 'light' ? '#262624' : 'white'" size="16"></lucide-icon>
+  </span>
+
+  <!-- Dark -->
+  <span
+    class="p-1 rounded-full cursor-pointer transition-colors duration-200 hover:bg-gray-500/40"
+    [class.bg-white]="activeTheme === 'dark'"
+    (click)="setTheme('dark')"
+  >
+    <lucide-icon [img]="dark" class="my-icon" [color]="activeTheme === 'dark' ? '#262624' : 'white'" size="16"></lucide-icon>
+  </span>
+
+  <!-- System -->
+  <span
+    class="p-1 rounded-full cursor-pointer transition-colors duration-200 hover:bg-gray-500/40"
+    [class.bg-white]="activeTheme === 'system'"
+    (click)="setTheme('system')"
+  >
+    <lucide-icon [img]="system" class="my-icon" [color]="activeTheme === 'system' ? '#262624' : 'white'" size="16"></lucide-icon>
+  </span>
+</div>

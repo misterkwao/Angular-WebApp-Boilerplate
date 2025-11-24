@@ -1,0 +1,19 @@
+<div class="fixed top-5 right-5 z-[9999] flex flex-col gap-3 pointer-events-none">
+    @for(toast of toastService.toasts$ | async; track toast.id){
+    <div class="glass min-w-[300px] p-3 rounded-2xl shadow-sm pointer-events-auto animate-slide-in border border-[#DAD9D4] dark:border-[#41413E]">
+        <div class="flex justify-between items-center gap-3">
+            <span class="p-2 rounded-full {{toast.severity === 'success' ? 'text-[#0ac900] bg-green-700/15' : 
+                  toast.severity === 'error' ? 'text-[#ff0505de] bg-red-700/15' : 
+                  'text-[#f6fafee2] bg-gray-700/15'}}">
+                <lucide-icon
+                    [img]="toast.severity === 'success' ? successIco : toast.severity === 'error'? errorIco : infoIco"
+                    size="18"></lucide-icon>
+            </span>
+            <span class="flex-1 text-sm">{{toast.message}}</span>
+            <button
+                class="hover:dark:bg-gray-700 hover:bg-[#DAD9D4] rounded-lg border-0 text-2xl cursor-pointer p-0 w-6 h-6 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200"
+                (click)="removeToast(toast.id)">×</button>
+        </div>
+    </div>
+    }
+</div>

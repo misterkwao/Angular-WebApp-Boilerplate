@@ -1,0 +1,63 @@
+<mat-drawer-container class="h-screen" autosize>
+    <!-- Sidebar -->
+    <mat-drawer #drawer class="text-white p-1" [mode]="drawerMode" [opened]="drawerMode === 'side'? true : false"
+        [style.width]="drawerMode === 'side' ? (isExpanded ? '190px' : '80px') : '300px'">
+        <div class="ml-1 dark:bg-[#1f1e1d] bg-white h-full rounded-[23px]">
+            <div class="flex items-center justify-center pt-4 gap-2 cursor-pointer px-2 py-1 rounded"
+                (click)="toggleDrawer()">
+                <img src="" alt="Your Logo" [width]="isExpanded ? 30 : 30"
+                    class="object-contain" />
+            </div>
+            <nav class="mt-10 flex flex-col px-3 space-y-4 overflow-hidden">
+                <a [routerLink]="['']" routerLinkActive="bg-[#FF6B35] text-white"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="flex items-center h-10 rounded-full px-3 transition dark:hover:bg-[#262624] hover:bg-[#f5f5f5] duration-400 ease-linear"
+                    [ngClass]="{ 'w-10': !isExpanded, 'w-auto': isExpanded }"
+                    (click)="drawerMode === 'over' ? drawer.toggle() : null">
+                    <span class="flex items-center gap-3">
+                        <lucide-icon [img]="dashboard" size="16"></lucide-icon>
+                        <span [ngClass]="{ 'hidden': !isExpanded }">Your route</span>
+                    </span>
+                </a>
+            </nav>
+        </div>
+    </mat-drawer>
+    <!-- Notification panel -->
+    <app-notifications [visible]="showNotificationPanel"
+        (visibleChange)="showNotificationPanel = $event"></app-notifications>
+
+    <!-- Main Content -->
+    <mat-drawer-content class="px-2 flex flex-col h-full overflow-hidden">
+        <!-- Navbar -->
+        <header
+            class="mt-1 sticky inset-x-0 z-2 top-0 left-0 py-2 px-4 dark:bg-[#1f1e1d] bg-white rounded-[20px] flex items-center justify-between shrink-0">
+            <div class="flex gap-1 items-center">
+                @if(drawerMode === "over"){
+                <!-- Mobile -->
+                <button mat-icon-button (click)="drawer.toggle()">
+                    <lucide-icon [img]="panelLeftIco" class="my-icon" size="15"></lucide-icon>
+                </button>
+                }
+                <p>{{dayPeriod()}}</p>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button (click)="showNotificationPanel = !showNotificationPanel"
+                    class="dark:bg-[#262624] bg-[#f5f5f5] rounded-full p-3  cursor-pointer">
+                    <lucide-icon [img]="notificationIcon" size="16"></lucide-icon>
+                </button>
+                <button (click)="menu.toggle($event)"
+                    class="dark:bg-[#262624] bg-[#f5f5f5] rounded-full p-3 cursor-pointer">
+                    <lucide-icon [img]="userIcon" size="16"></lucide-icon>
+                </button>
+                <p-menu #menu [model]="items" [popup]="true" appendTo="body" />
+                <app-theme-mode></app-theme-mode>
+            </div>
+        </header>
+        <!-- Page Content -->
+        <div
+            class="mt-2 mb-2 p-5 dark:bg-[#1f1e1d] bg-white rounded-[20px] h-[calc(100vh-77px)] custom-scrollbar-vertical overflow-y-auto">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

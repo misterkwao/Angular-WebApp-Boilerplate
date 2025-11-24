@@ -1,0 +1,30 @@
+<p-drawer #drawerRef [(visible)]="visible" position="right" styleClass="border-none" (onHide)="hide()">
+    <ng-template #headless>
+        <div class="dark:text-white dark:bg-[#1f1e1d] bg-white flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-300 dark:border-zinc-800">
+                <p class="text-lg font-semibold">Notifications</p>
+                <button (click)="closeCallback($event)"
+                    class="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer">
+                    <lucide-icon [img]="closeIco" class="w-4 h-4"></lucide-icon>
+                </button>
+            </div>
+            <!-- contents -->
+            <ul class="p-3 space-y-3 overflow-y-auto">
+                <!-- Notification item -->
+                <li
+                    class="flex items-center gap-3 p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 transition-all cursor-pointer">
+                    <div class="flex-shrink-0">
+                        <lucide-icon [img]="bellIco" class="w-5 h-5 text-indigo-500"></lucide-icon>
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <p class="text-sm text-zinc-800 dark:text-zinc-200">
+                            New user <span class="font-medium">Kwame</span> just signed up.
+                        </p>
+                        <span class="text-xs text-zinc-500 mt-1">2m ago</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+</p-drawer>
