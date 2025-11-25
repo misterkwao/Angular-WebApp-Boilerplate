@@ -1,0 +1,30 @@
+<div class="bg-white">
+    <span class="flex p-4 items-center gap-3 text-lg font-semibold border-b border-[#c4c6d0]">
+        <lucide-icon [img]="info" size="30" color="#84858c"></lucide-icon>
+        <p class="text-gray-600">Confirm {{data.type}}</p>
+    </span>
+
+    <mat-dialog-content class="bg-gray-100 border-b border-[#c4c6d0]">
+        <p class="pb-4 text-sm">{{data.message}}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="flex justify-end gap-3 ">
+        <button mat-button mat-dialog-close class="w-20 h-[30px] rounded-lg border border-[#c4c6d0] text-gray-600"
+            [disabled]="showLoader()">
+            Cancel
+        </button>
+        <button [disabled]="showLoader()" mat-button color="warn" (click)="confirm()" [ngClass]="{
+                'bg-red-600 hover:bg-red-700': data.type.toLocaleLowerCase() === 'delete',
+                'bg-green-600 hover:bg-green-700': data.type.toLocaleLowerCase() !== 'delete',
+                'text-white rounded-lg transition': true
+            }" class="w-22 h-[30px]">
+            @if (showLoader()) {
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s"
+                [style]="{ width: '20px', height: '25px' }" />
+            }
+            @else {
+            {{data.type}}
+            }
+        </button>
+    </mat-dialog-actions>
+</div>
